@@ -1,6 +1,6 @@
 .signUpContainer {
   display: grid;
-  grid-template-rows: 4fr 3fr; /* flexible ratio: card vs button */
+  grid-template-rows: 3fr 4fr; /* flexible ratio: card vs button */
   width: 100vw;
   height: 100vh; /* fill full screen height */
   gap: 1rem;
@@ -10,10 +10,9 @@
   box-sizing: border-box;
   margin: 0;
   background: transparent;
-  overflow: hidden; /* prevent scrollbars */
 }
 
-.cardContainer, .buttonContainer {
+.cardContainer, .formContainer {
   width: 100%;
   border-radius: 1vw;
   box-sizing: border-box;
@@ -24,7 +23,62 @@
   height: 100%;
 }
 
-.buttonContainer {
-  background-color: green;
+.formContainer {
+  /* background-color: green; */
   height: 100%;
+  display: grid;
+  align-items: center;  
+}
+.formContainerSection{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1vw;
+    justify-items: center;
+}
+
+.inputField{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.submitForm{
+    width: 20vw;
+    height: 5vh;
+    border-radius: 5px;
+    background-color: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputStyle{
+    border: none;
+    border-radius: 5px;
+    height: 3vh;
+    width: 20vw;
+    font-family: 'Poppins';
+}
+
+input {
+  outline: none;
+  box-shadow: 0 0 4px #00bfff;
+}
+/* Style the custom upload button */
+.customFileUpload {
+  background-color: #00bfff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  font-family: 'Poppins';
+  width: 20vw;
+  display: inline-block;
+}
+.customFileUpload:hover {
+  background-color: #009acd;
+}
+.inputFileStyle{
+  /* display: hidden; */
+ visibility: hidden
 }
