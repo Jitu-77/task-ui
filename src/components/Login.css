@@ -25,7 +25,7 @@
 }
 
 .formContainer {
-  background-color: green;
+  /* background-color: green; */
   height: 100%;
   display: grid;
   align-items: center;
@@ -60,8 +60,7 @@
     font-family: 'Poppins';
 }
 
-input:focus {
+input {
   outline: none;
-  /* border-color: #00bfff; */
   box-shadow: 0 0 4px #00bfff;
 }
