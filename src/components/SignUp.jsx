@@ -1,9 +1,11 @@
 import React ,{useState} from 'react'
 import './SignUp.css'
+import { useNavigate } from 'react-router-dom';
 function SignUp() {
+    const navigate = useNavigate();
   const [fileName, setFileName] = useState('');
   const handleSubmit=()=>{
-
+ navigate("/")
   }
   const initialValues = {
     username :"",
@@ -47,7 +49,7 @@ function SignUp() {
               {fileName && <p className="fileName">{fileName}</p>}
               </div>
 
-              <div className='submitForm'>
+              <div className='submitForm' onClick={handleSubmit}>
                 Submit
               </div>
             </div>        

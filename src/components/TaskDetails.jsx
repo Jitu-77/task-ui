@@ -1,12 +1,20 @@
 import React from 'react'
 import './TaskDetails.css'
+import { useNavigate } from 'react-router-dom';
 function TaskDetails() {
+      const navigate = useNavigate();
+    const handleBack=()=>{
+    navigate("/dashboard")
+  }
+    const handleSubmit=()=>{
+ navigate("/dashboard")
+  }
   return (
     <div className='taskDetailsContainer'>
         <div className='headerSection'>
                 TaskDetails
         </div>
-        <div>
+        <div onClick={handleBack}>
           <img src='./back.png' className='backButton'/>
         </div>
             <div className='formContainerSection'>
@@ -25,7 +33,7 @@ function TaskDetails() {
               <input className='inputStyle' type='text'/>
               </div>
 
-              <div className='submitForm'>
+              <div className='submitForm' onClick={handleSubmit}>
                 Submit
               </div>
             </div>         

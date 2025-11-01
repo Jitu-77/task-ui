@@ -4,9 +4,19 @@ import Login from './components/Login.jsx'
 import SignUp from './components/SignUp.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import TaskDetails from './components/TaskDetails.jsx'
-
+import {createBrowserRouter,createRoutesFromElements,Route,RouterProvider} from 'react-router-dom'
 export default function App() {
-  return (
-    <TaskDetails/>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+      <Route path='/' element = {<Login/>}/>,
+      <Route path='/sign-up' element = {<SignUp/>}/>,
+      <Route path='/dashboard' element = {<Dashboard/>}/>,
+      <Route path='/tasks' element = {<TaskDetails/>}/>
+      {/* <Route path='/tasks/:id' element = {<TaskDetails/>}/> */}
+      </>
+    )
   )
+  return <RouterProvider router={router}/>
+  
 }

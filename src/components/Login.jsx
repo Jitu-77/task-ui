@@ -1,9 +1,14 @@
 import React from 'react'
 import './Login.css'
 import { Formik,Form , ErrorMessage } from 'formik'
+import { useNavigate } from 'react-router-dom';
 function Login() {
+  const navigate = useNavigate();
   const handleSubmit=()=>{
-
+    navigate("/dashboard")
+  }
+  const handleSignUp=()=>{
+    navigate("/sign-up")
   }
   const initialValues = {
     username :"",
@@ -25,8 +30,12 @@ function Login() {
               <input className='inputStyle' type='text'/>
               </div>
 
-              <div className='submitForm'>
+              <div className='submitForm' onClick={handleSubmit}>
                 Submit
+              </div>
+
+              <div className='submitForm' onClick={handleSignUp}>
+                sign Up
               </div>
             </div>
 

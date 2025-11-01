@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './Dashboard.css'
+import { useNavigate } from 'react-router-dom';
 function Dashboard() {
+    const navigate = useNavigate();
+    const handleLogout=()=>{
+    navigate("/")
+  }
   const [listData,setListData] = useState([])
   useEffect(()=>{
     let data = 
@@ -70,10 +75,13 @@ function Dashboard() {
       )
     )
   }
+  const handleTasks = ()=>{
+    navigate("/tasks")
+  }
   return (
     <div className='dashboardContainer'>
         <div className='sidenavContainer'>
-        <div className='logOutButton'>
+        <div className='logOutButton' onClick={handleLogout}>
           Logout
         </div>
         
@@ -81,7 +89,7 @@ function Dashboard() {
         <div className='contentContainer'>
         
         {listData.length>0?(
-          <div className='taskCards'>
+          <div className='taskCards'onClick={handleTasks}>
           {listData.map((item)=>(
             <div className='taskCardsContainer' key={item._id}>
                 <div>
