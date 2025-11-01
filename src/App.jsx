@@ -5,6 +5,6 @@ import SignUp from './components/SignUp.jsx'
 import Dashboard from './components/Dashboard.jsx'
 export default function App() {
   return (
-    <Dashboard/>
+    <Login/>
   )
 }

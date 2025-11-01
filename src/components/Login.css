@@ -1,6 +1,6 @@
 .loginContainer {
   display: grid;
-  grid-template-rows: 6fr 1fr; /* flexible ratio: card vs button */
+  grid-template-rows: 4fr 3fr; /* flexible ratio: card vs button */
   width: 100vw;
   height: 100vh; /* fill full screen height */
   gap: 1rem;
@@ -13,7 +13,7 @@
   /* overflow: hidden;  */
 }
 
-.cardContainer, .buttonContainer {
+.cardContainer, .formContainer {
   width: 100%;
   border-radius: 1vw;
   box-sizing: border-box;
@@ -24,7 +24,44 @@
   height: 100%;
 }
 
-.buttonContainer {
+.formContainer {
   background-color: green;
   height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+.formContainerSection{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1vw;
+    justify-items: center;
+}
+
+.inputField{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.submitForm{
+    width: 20vw;
+    height: 5vh;
+    border-radius: 5px;
+    background-color: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputStyle{
+    border: none;
+    border-radius: 5px;
+    height: 3vh;
+    width: 20vw;
+    font-family: 'Poppins';
+}
+
+input:focus {
+  outline: none;
+  /* border-color: #00bfff; */
+  box-shadow: 0 0 4px #00bfff;
 }
