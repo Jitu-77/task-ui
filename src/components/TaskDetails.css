@@ -1,0 +1,67 @@
+.taskDetailsContainer{
+  display: flex;                  /* Used flexbox instead of grid for better flow */
+  flex-direction: column;         /* Stack header + form vertically */
+  align-items: center;            /* Center form horizontally */
+  justify-content: flex-start;    /* Keep header at the top */
+  width: 100vw;
+  height: 100vh;
+  background-color: aqua;
+  padding: 2vh 2vw;               /* Add breathing space */
+  box-sizing: border-box;
+}
+.formContainerSection{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1vw;
+    justify-items: center;
+}
+
+.inputField{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.submitForm{
+    width: 20vw;
+    height: 5vh;
+    border-radius: 5px;
+    background-color: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputStyle{
+    border: none;
+    border-radius: 5px;
+    height: 3vh;
+    width: 20vw;
+    font-family: 'Poppins';
+}
+
+input {
+  outline: none;
+  box-shadow: 0 0 4px #00bfff;
+}
+
+
+/* Header Section */
+.headerSection {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  margin-bottom: 4vh;
+}
+
+.backButton {
+  width: 5vw;                     /* Responsive width (5% of viewport width) */
+  height: auto;                   /* Maintain aspect ratio */
+  max-width: 50px;                /* Avoid being too large on large screens */
+  min-width: 25px;                /* Avoid shrinking too small */
+  cursor: pointer;
+  object-fit: contain; 
+}
+
+.backButton:hover {
+  transform: scale(1.1);
+}
