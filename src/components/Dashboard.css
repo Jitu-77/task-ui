@@ -1,0 +1,30 @@
+.dashboardContainer {
+  display: grid;
+  grid-template-columns: 1fr 6fr; /* flexible ratio: card vs button */
+  width: 100vw;
+  height: 100vh; /* fill full screen height */
+  gap: 1rem;
+  padding: 2vw;
+  align-items: center;
+  justify-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  background: transparent;
+  overflow: hidden; /* prevent scrollbars */
+}
+
+.sidenavContainer, .contentContainer {
+  width: 100%;
+  border-radius: 1vw;
+  box-sizing: border-box;
+}
+
+.sidenavContainer {
+  background-color: aqua;
+  height: 100%;
+}
+
+.contentContainer {
+  background-color: green;
+  height: 100%;
+}

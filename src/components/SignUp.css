@@ -1,0 +1,30 @@
+.signUpContainer {
+  display: grid;
+  grid-template-rows: 4fr 3fr; /* flexible ratio: card vs button */
+  width: 100vw;
+  height: 100vh; /* fill full screen height */
+  gap: 1rem;
+  padding: 2vw;
+  align-items: center;
+  justify-items: center;
+  box-sizing: border-box;
+  margin: 0;
+  background: transparent;
+  overflow: hidden; /* prevent scrollbars */
+}
+
+.cardContainer, .buttonContainer {
+  width: 100%;
+  border-radius: 1vw;
+  box-sizing: border-box;
+}
+
+.cardContainer {
+  background-color: aqua;
+  height: 100%;
+}
+
+.buttonContainer {
+  background-color: green;
+  height: 100%;
+}
