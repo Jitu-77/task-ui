@@ -1,6 +1,6 @@
 .dashboardContainer {
   display: grid;
-  grid-template-columns: 1fr 6fr; /* flexible ratio: card vs button */
+  grid-template-columns: 2fr 4fr; /* flexible ratio: card vs button */
   width: 100vw;
   height: 100vh; /* fill full screen height */
   gap: 1rem;
@@ -22,9 +22,52 @@
 .sidenavContainer {
   background-color: aqua;
   height: 100%;
+  display: grid;
+  align-items: end;
+  justify-content: center;
+  padding: 1vw;
+  
 }
 
 .contentContainer {
-  background-color: green;
+  /* background-color: green; */
   height: 100%;
+}
+.logOutButton{
+    width: 20vw;
+    height: 5vh;
+    border-radius: 5px;
+    background-color: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
+.taskCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.taskCardsContainer {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1rem;
+  transition: transform 0.2s;
+}
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkboxContainer input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #00bfff; /* modern browsers */
+  cursor: pointer;
+}
+
+.checkboxContainer label {
+  font-size: 0.9rem;
+  color: #333;
 }
