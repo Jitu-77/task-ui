@@ -2,10 +2,18 @@ import React from 'react'
 import './Login.css'
 import { Formik,Form , ErrorMessage } from 'formik'
 import { useNavigate } from 'react-router-dom';
+import {LoginValidators} from '../utilities/Utils.js'
+import {PostResponse} from '../utilities/api.js'
 function Login() {
   const navigate = useNavigate();
-  const handleSubmit=()=>{
-    navigate("/dashboard")
+  const handleSubmit=async (values)=>{
+    console.log("Pressed Continue button", values);
+    if(values){
+      const response = await PostResponse('login',values)
+      if(response?.status){
+        navigate("/dashboard")
+      }
+    }
   }
   const handleSignUp=()=>{
     navigate("/sign-up")
@@ -18,27 +26,55 @@ function Login() {
     <div className='loginContainer'>
         <div className='cardContainer'> </div>
         <div className='formContainer'>
-
+    <Formik initialValues={initialValues} validationSchema={LoginValidators} onSubmit={handleSubmit}>
+    {({values,errors,touched,handleChange,handleBlur,setFieldValue})=>(
+      <>
             <div className='formContainerSection'>
               <div className='inputField'>
-              <label>Email</label>
-              <input className='inputStyle' type='text'/>
+              <label>Username</label>
+              <input 
+                  className='inputStyle' 
+                  type='text'
+                  name = 'username'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.username}
+                  />
+                  <ErrorMessage name='username' className='errorClass'/>
               </div>
 
               <div className='inputField'>
               <label>Password</label>
-              <input className='inputStyle' type='text'/>
+              <input 
+                  className='inputStyle' 
+                  type='text'
+                  name = 'password'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}                    
+                  />
+                   <ErrorMessage name='password' className='errorClass'/>
               </div>
 
-              <div className='submitForm' onClick={handleSubmit}>
+              <button 
+                className='submitForm' 
+                type="submit"
+                onClick = {(e)=>{
+                    e.preventDefault()
+                    handleSubmit(values)
+                }} 
+                >
                 Submit
-              </div>
+              </button>
 
               <div className='submitForm' onClick={handleSignUp}>
                 sign Up
               </div>
             </div>
+      </>
+    )}
 
+    </Formik>
 
         </div>
     </div>

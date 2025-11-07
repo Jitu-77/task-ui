@@ -13,7 +13,8 @@ export default function App() {
       <Route path='/sign-up' element = {<SignUp/>}/>,
       <Route path='/dashboard' element = {<Dashboard/>}/>,
       <Route path='/tasks' element = {<TaskDetails/>}/>
-      {/* <Route path='/tasks/:id' element = {<TaskDetails/>}/> */}
+      <Route path='/tasks/:_id' element = {<TaskDetails/>}/>
+      <Route path='*' element = {<Login/>}/>
       </>
     )
   )
