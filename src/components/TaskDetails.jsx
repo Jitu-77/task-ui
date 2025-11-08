@@ -35,7 +35,7 @@ function TaskDetails() {
       const response = await PostResponse('tasks/create',formData)
       if(response){
         console.log(response,"<------->")
-         navigate("/")
+         navigate("/dashboard")
       }      
       // navigate("/dashboard")
   }
