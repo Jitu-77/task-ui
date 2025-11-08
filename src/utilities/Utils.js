@@ -20,3 +20,13 @@ export const SignUpValidators = ()=>{
     })
     return validationSchema
 }
+
+export const TasksValidators = ()=>{
+    const validationSchema = Yup.object({
+        title : Yup.string().required("Title is required"),
+        subTitle : Yup.string().required("sub title is required"),
+        description : Yup.string().required("Description is required"),
+        supportingDocuments : Yup.mixed()
+    })
+    return validationSchema
+}

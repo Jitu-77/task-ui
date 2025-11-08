@@ -25,3 +25,13 @@ export const GetResponse = async(url)=>{
         
     }
 }
+
+export const GetByIdResponse = async(url)=>{
+    try {
+        const config = {'Content-Type': 'application/json'};
+        const getResponse = await api.get(url)
+        return getResponse?.data
+    } catch (error) {
+        
+    }
+}

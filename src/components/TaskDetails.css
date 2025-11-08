@@ -65,3 +65,24 @@ input {
 .backButton:hover {
   transform: scale(1.1);
 }
+
+.inputFileStyle{
+  /* display: hidden; */
+ visibility: hidden
+
+}
+.customFileUpload {
+  background-color: #00bfff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  font-family: 'Poppins';
+  width: 20vw;
+  display: inline-block;
+}
+.customFileUpload:hover {
+  background-color: #009acd;
+}
