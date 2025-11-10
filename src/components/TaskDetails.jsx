@@ -7,7 +7,10 @@ import { Formik,Form , ErrorMessage } from 'formik'
 import {TasksValidators} from '../utilities/Utils.js'
 import {PostResponse} from '../utilities/api.js'
 import {GetByIdResponse} from '../utilities/api.js'
+import {userDetails} from '../utilities/userContext.jsx'
 function TaskDetails() {
+     const {user,setUser} = userDetails();
+     console.log(user,"USER DET")  
   const [initialValues,setInitialValues] = React.useState({
     title : "",
     subTitle : "",

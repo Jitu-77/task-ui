@@ -3,8 +3,11 @@ import './Dashboard.css'
 import { data, useNavigate } from 'react-router-dom';
 import {PostResponse} from '../utilities/api.js'
 import {GetResponse} from '../utilities/api.js'
+import {userDetails} from '../utilities/userContext.jsx'
 function Dashboard() {
     const navigate = useNavigate();
+     const {user,setUser} = userDetails();
+     console.log(user,"USER DET")
     const handleLogout=async ()=>{
       const response = await PostResponse('logout',{})
       navigate("/")
