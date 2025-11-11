@@ -44,7 +44,7 @@ function Dashboard() {
         </div>
         <div className='contentContainer'>
           <img src='./plus.svg'  onClick={()=>  navigate("/tasks") }/>
-        {listData.length>0?(
+        {listData && listData.length>0?(
           <div className='taskCards'>
           {listData.map((item)=>(
             <div className='taskCardsContainer' key={item._id}>
