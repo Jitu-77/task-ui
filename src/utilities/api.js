@@ -35,3 +35,13 @@ export const GetByIdResponse = async(url)=>{
         
     }
 }
+
+export const UpdateByIdResponse = async(url,payload) =>{
+    try {
+        const config = {'Content-Type': 'application/json'}
+        const patchResponse = await api.patch(url,payload)
+        return patchResponse?.data
+    } catch (error) {
+        
+    }
+}

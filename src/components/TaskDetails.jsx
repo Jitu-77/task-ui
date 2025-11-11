@@ -8,6 +8,7 @@ import {TasksValidators} from '../utilities/Utils.js'
 import {PostResponse} from '../utilities/api.js'
 import {GetByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
+import {UpdateByIdResponse} from '../utilities/api.js'
 function TaskDetails() {
      const {user,setUser} = userDetails();
      console.log(user,"USER DET")  
@@ -25,7 +26,6 @@ function TaskDetails() {
     navigate("/dashboard")
   }
     const handleSubmit=async (values)=>{
-      console.log(values)
       const formData = new FormData()
       formData.append('title',values.title);
       formData.append('subTitle',values.subTitle);
@@ -35,11 +35,21 @@ function TaskDetails() {
           formData.append("supportingDocuments", file);
         });
       console.log(formData,"Form Data")
-      const response = await PostResponse('tasks/create',formData)
-      if(response){
-        console.log(response,"<------->")
-         navigate("/dashboard")
-      }      
+      if(_id){
+        console.log(values)
+        const {supportingDocuments,...payload}=values
+        const response = await UpdateByIdResponse('tasks/updateById/'+_id,payload)
+        if(response){
+          console.log(response,"<------->")
+           navigate("/dashboard")
+        } 
+      }else{
+        const response = await PostResponse('tasks/create',formData)
+        if(response){
+          console.log(response,"<------->")
+           navigate("/dashboard")
+        }      
+      }
       // navigate("/dashboard")
   }
   useEffect(()=>{
@@ -139,7 +149,7 @@ function TaskDetails() {
                 Submit
               </div> */}
               <button className='submitForm'>
-                Submit
+               {_id ? 'Update' : 'Submit'}
               </button>
             </div> 
           </Form>

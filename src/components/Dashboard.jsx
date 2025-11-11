@@ -3,6 +3,7 @@ import './Dashboard.css'
 import { data, useNavigate } from 'react-router-dom';
 import {PostResponse} from '../utilities/api.js'
 import {GetResponse} from '../utilities/api.js'
+import {UpdateByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
 function Dashboard() {
     const navigate = useNavigate();
@@ -13,20 +14,27 @@ function Dashboard() {
       navigate("/")
   }
   const [listData,setListData] = useState([])
-  useEffect( ()=>{
-    async function fetchData(){
+  const fetchData = async ()=>{
       const dataResponse = await GetResponse('tasks/getAll')
-      console.log(dataResponse,"Data Response")
-      setListData(dataResponse?.data)
-    }
+      if(dataResponse){
+        console.log(dataResponse,"Data Response")
+        setListData(dataResponse?.data)
+      }
+  }
+  useEffect( ()=>{
+    console.log("In use Effect")
     fetchData()
   },[])
-  const handleToggleCompleted = (id)=>{
-    setListData((prev)=>
-      prev.map((elem)=> 
-        elem._id == id ? {...elem ,completed:!elem.completed} : {...elem}
-      )
-    )
+  const handleToggleCompleted = async (id)=>{
+    const data = listData.find((el)=>el._id == id)
+    const {completed,...rest} = data
+    console.log(completed)
+    const payload = {completed:!completed}
+    const patchResponse = await UpdateByIdResponse('tasks/updateById/'+id,payload)
+    if(patchResponse){
+      fetchData();
+      console.log(patchResponse,"PATCH RESPONSE")
+    }
   }
   const handleTasks = (item)=>{
     console.log(item,"ITEM")
