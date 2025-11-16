@@ -4,7 +4,9 @@ import { data, useNavigate } from 'react-router-dom';
 import {PostResponse} from '../utilities/api.js'
 import {GetResponse} from '../utilities/api.js'
 import {UpdateByIdResponse} from '../utilities/api.js'
+import {DeleteByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
+import Delete from '../assets/delete.png';
 function Dashboard() {
     const navigate = useNavigate();
      const {user,setUser} = userDetails();
@@ -42,6 +44,16 @@ function Dashboard() {
       navigate("/tasks/"+item?._id)
     }
   }
+
+  const onDeleteCall = async (item)=>{
+    console.log(item,"ITEM")
+    if(item?._id){
+     const deleteResponse = await DeleteByIdResponse('tasks/deleteById/'+item?._id)
+     if(deleteResponse){
+      fetchData();
+     }
+    }
+  }
   return (
     <div className='dashboardContainer'>
         <div className='sidenavContainer'>
@@ -61,11 +73,14 @@ function Dashboard() {
                   <p className='subTitle'>{item.subTitle}</p>
                 </div>
                 <div className='checkboxContainer'>
+                <div>
                   <input type="checkbox" 
                     checked = {item.completed}
                     onChange={() => handleToggleCompleted(item._id)}
                   />
                    <label>{item.completed ? 'Completed' : 'Pending'}</label>
+                </div>
+                   <img src={Delete} className='deleteButton' onClick={()=> onDeleteCall(item)}/>
                 </div>
             </div>
           ))}  

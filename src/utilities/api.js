@@ -45,3 +45,13 @@ export const UpdateByIdResponse = async(url,payload) =>{
         
     }
 }
+export const DeleteByIdResponse = async(url) =>{
+    try {
+        const config = {'Content-Type': 'application/json'}
+        const deleteResponse = await api.delete(url)
+        return deleteResponse?.data
+    } catch (error) {
+        
+    }
+}
+
