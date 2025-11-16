@@ -5,6 +5,7 @@ import {PostResponse} from '../utilities/api.js'
 import {GetResponse} from '../utilities/api.js'
 import {UpdateByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
+import Delete from '../assets/delete.png';
 function Dashboard() {
     const navigate = useNavigate();
      const {user,setUser} = userDetails();
@@ -61,11 +62,14 @@ function Dashboard() {
                   <p className='subTitle'>{item.subTitle}</p>
                 </div>
                 <div className='checkboxContainer'>
+                <div>
                   <input type="checkbox" 
                     checked = {item.completed}
                     onChange={() => handleToggleCompleted(item._id)}
                   />
                    <label>{item.completed ? 'Completed' : 'Pending'}</label>
+                </div>
+                   <img src={Delete} className='deleteButton' />
                 </div>
             </div>
           ))}  

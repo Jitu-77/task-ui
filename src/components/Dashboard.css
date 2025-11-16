@@ -58,6 +58,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-content: space-between;
 }
 
 .checkboxContainer input[type="checkbox"] {
@@ -70,4 +71,17 @@
 .checkboxContainer label {
   font-size: 0.9rem;
   color: #333;
+}
+
+.deleteButton {
+  width: 2vw;                     /* Responsive width (5% of viewport width) */
+  height: auto;                   /* Maintain aspect ratio */
+  max-width: 50px;                /* Avoid being too large on large screens */
+  min-width: 25px;                /* Avoid shrinking too small */
+  cursor: pointer;
+  object-fit: contain; 
+}
+
+.deleteButton:hover {
+  transform: scale(1.1);
 }
