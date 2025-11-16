@@ -27,21 +27,22 @@ function Dashboard() {
     //     setListData(dataResponse?.data)
     //   }
     // }
-    const taskData = useSelector((state)=>state.tasks)
+    const taskData = useSelector((state)=>state.tasks.tasks)
     console.log("TASK DATA",taskData)
-  useEffect( ()=>{
-    console.log("In use Effect")
-    // ---------replaced
-    // fetchData()
-    dispatch(getAllTasks())
-  },[])
-  useEffect( ()=>{
-        if(taskData && taskData?.tasks){
-      setListData(taskData?.tasks)
-    }
-  },[taskData])
+  // useEffect( ()=>{
+  //   console.log("In use Effect")
+  //   // ---------replaced
+  //   // fetchData()
+  //   dispatch(getAllTasks())
+  // },[])
+useEffect(()=>{
+  if(!taskData || taskData.length == 0) {
+    dispatch(getAllTasks());
+  }
+},[taskData]);
   const handleToggleCompleted = async (id)=>{
-    const data = listData.find((el)=>el._id == id)
+    // const data = listData.find((el)=>el._id == id) 
+    const data = taskData.find((el)=>el._id == id)
     const {completed,...rest} = data
     console.log(completed)
     const payload = {completed:!completed}
@@ -82,9 +83,11 @@ function Dashboard() {
         </div>
         <div className='contentContainer'>
           <img src='./plus.svg'  onClick={()=>  navigate("/tasks") }/>
-        {listData && listData.length>0?(
+        {/* {listData && listData.length>0?( */}
+        {taskData && taskData.length>0?(
           <div className='taskCards'>
-          {listData.map((item)=>(
+          {/* {listData.map((item)=>( */}
+          {taskData.map((item)=>(
             <div className='taskCardsContainer' key={item._id}>
                 <div onClick={()=>handleTasks(item)}>
                   <h3 className='title'>{item.title}</h3>
