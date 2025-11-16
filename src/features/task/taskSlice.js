@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk} from "@reduxjs/toolkit";
-import {GetResponse,UpdateByIdResponse} from '../../utilities/api.js'
+import {GetResponse,UpdateByIdResponse,DeleteByIdResponse} from '../../utilities/api.js'
 
 //getAllTasks
 export const getAllTasks = createAsyncThunk('getAllTasks',async (data,{rejectWithValue})=>{
@@ -17,13 +17,23 @@ export const updateTaskById = createAsyncThunk('updateTaskById',async (data,{rej
         try {
             console.log("updateTaskById Slice ---",data)
             const updateResponse = await UpdateByIdResponse('tasks/updateById/'+data?.id,data?.payload)
-            console.log("dataResponse",updateResponse)
+            console.log("updateResponse",updateResponse)
             return updateResponse?.data
         } catch (error) {
              return rejectWithValue(error.message);
         }
 })
 
+export const deleteTaskById = createAsyncThunk('deleteTaskById',async (data,{rejectWithValue})=>{
+        try {
+            console.log("deleteTaskById Slice ---",data)
+            const deleteResponse = await DeleteByIdResponse('tasks/deleteById/'+data?.id)
+            console.log("deleteResponse",deleteResponse)
+            return{id : data?.id}
+        } catch (error) {
+             return rejectWithValue(error.message);
+        }
+})
 
 const initialState = {
     tasks: [],
@@ -54,15 +64,31 @@ export const taskSlice = createSlice({
         })
         .addCase(updateTaskById.pending,(state)=>{
             state.loading = true
+            state.error = null
         })        
         .addCase(updateTaskById.fulfilled,(state,action)=>{
             state.loading = false
-            console.log(action.payload, "Action Payload Fulfilled")
+            console.log(action.payload, "Action Payload Fulfilled Update")
             state.tasks = state.tasks.map((el)=>{
               return  el?._id == action.payload._id ? action?.payload : el
             })
         })        
         .addCase(updateTaskById.rejected,(state)=>{
+            state.loading = false
+            state.error = true
+        })        
+        .addCase(deleteTaskById.pending,(state)=>{
+            state.loading = true
+            state.error = null
+        })        
+        .addCase(deleteTaskById.fulfilled,(state,action)=>{
+            state.loading = false
+            console.log(action.payload, "Action Payload Fulfilled Update")
+            state.tasks = state.tasks.filter((el)=>{
+              return  el?._id !== action.payload.id 
+            })
+        })        
+        .addCase(deleteTaskById.rejected,(state)=>{
             state.loading = false
             state.error = true
         })        

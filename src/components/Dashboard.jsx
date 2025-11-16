@@ -8,7 +8,7 @@ import {DeleteByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
 import Delete from '../assets/delete.png';
 import { useSelector,useDispatch } from 'react-redux';
-import {getAllTasks,updateTaskById} from '../features/task/taskSlice.js'
+import {getAllTasks,updateTaskById,deleteTaskById} from '../features/task/taskSlice.js'
 function Dashboard() {
     const navigate = useNavigate();
     const {user,setUser} = userDetails();
@@ -19,6 +19,7 @@ function Dashboard() {
       navigate("/")
     }
     const [listData,setListData] = useState([])
+    // ---------replaced
     // const fetchData = async ()=>{
     //   const dataResponse = await GetResponse('tasks/getAll')
     //   if(dataResponse){
@@ -30,6 +31,7 @@ function Dashboard() {
     console.log("TASK DATA",taskData)
   useEffect( ()=>{
     console.log("In use Effect")
+    // ---------replaced
     // fetchData()
     dispatch(getAllTasks())
   },[])
@@ -45,13 +47,12 @@ function Dashboard() {
     const payload = {completed:!completed}
     console.log({id,payload},"MAIN DATA")
     dispatch(updateTaskById({id,payload}))
+    // ---------replaced
     // const patchResponse = await UpdateByIdResponse('tasks/updateById/'+id,payload)
     // if(patchResponse){
     //   fetchData();
     //   console.log(patchResponse,"PATCH RESPONSE")
     // }
-
-
   }
   const handleTasks = (item)=>{
     console.log(item,"ITEM")
@@ -63,10 +64,12 @@ function Dashboard() {
   const onDeleteCall = async (item)=>{
     console.log(item,"ITEM")
     if(item?._id){
-     const deleteResponse = await DeleteByIdResponse('tasks/deleteById/'+item?._id)
-     if(deleteResponse){
-      // fetchData();
-     }
+      dispatch(deleteTaskById({id:item?._id}))
+    // ---------replaced      
+    //  const deleteResponse = await DeleteByIdResponse('tasks/deleteById/'+item?._id)
+    //  if(deleteResponse){
+    //   fetchData();
+    //  }
     }
   }
   return (
