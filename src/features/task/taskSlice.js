@@ -1,5 +1,5 @@
 import { createSlice,createAsyncThunk} from "@reduxjs/toolkit";
-import {GetResponse,UpdateByIdResponse,DeleteByIdResponse} from '../../utilities/api.js'
+import {GetResponse,UpdateByIdResponse,DeleteByIdResponse,PostResponse} from '../../utilities/api.js'
 
 //getAllTasks
 export const getAllTasks = createAsyncThunk('getAllTasks',async (data,{rejectWithValue})=>{
@@ -30,6 +30,17 @@ export const deleteTaskById = createAsyncThunk('deleteTaskById',async (data,{rej
             const deleteResponse = await DeleteByIdResponse('tasks/deleteById/'+data?.id)
             console.log("deleteResponse",deleteResponse)
             return{id : data?.id}
+        } catch (error) {
+             return rejectWithValue(error.message);
+        }
+})
+
+export const postTask = createAsyncThunk('postTask',async (data,{rejectWithValue})=>{
+        try {
+            console.log("postTask Slice ---",data)
+            const postResponse = await PostResponse('tasks/create',data)
+            console.log("postResponse",postResponse)
+            return postResponse.data
         } catch (error) {
              return rejectWithValue(error.message);
         }
@@ -83,12 +94,25 @@ export const taskSlice = createSlice({
         })        
         .addCase(deleteTaskById.fulfilled,(state,action)=>{
             state.loading = false
-            console.log(action.payload, "Action Payload Fulfilled Update")
+            console.log(action.payload, "Action Payload Fulfilled Delete")
             state.tasks = state.tasks.filter((el)=>{
               return  el?._id !== action.payload.id 
             })
         })        
         .addCase(deleteTaskById.rejected,(state)=>{
+            state.loading = false
+            state.error = true
+        })        
+        .addCase(postTask.pending,(state)=>{
+            state.loading = true
+            state.error = null
+        })        
+        .addCase(postTask.fulfilled,(state,action)=>{
+            state.loading = false
+            console.log(action.payload, "Action Payload Fulfilled POST")
+            state.tasks.push(action.payload)
+        })        
+        .addCase(postTask.rejected,(state)=>{
             state.loading = false
             state.error = true
         })        

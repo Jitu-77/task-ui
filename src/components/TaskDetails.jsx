@@ -9,7 +9,10 @@ import {PostResponse} from '../utilities/api.js'
 import {GetByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
 import {UpdateByIdResponse} from '../utilities/api.js'
+import {postTask,updateTaskById} from '../features/task/taskSlice.js'
+import { useDispatch } from 'react-redux';
 function TaskDetails() {
+      const dispatch = useDispatch()
      const {user,setUser} = userDetails();
      console.log(user,"USER DET")  
   const [initialValues,setInitialValues] = React.useState({
@@ -38,17 +41,24 @@ function TaskDetails() {
       if(_id){
         console.log(values)
         const {supportingDocuments,...payload}=values
-        const response = await UpdateByIdResponse('tasks/updateById/'+_id,payload)
-        if(response){
-          console.log(response,"<------->")
-           navigate("/dashboard")
-        } 
+        //-----replaced----------
+        // const response = await UpdateByIdResponse('tasks/updateById/'+_id,payload)
+        // if(response){
+        //   console.log(response,"<------->")
+        //    navigate("/dashboard")
+        // }
+
+        dispatch(updateTaskById({id:_id,payload}))
+        navigate("/dashboard")
       }else{
-        const response = await PostResponse('tasks/create',formData)
-        if(response){
-          console.log(response,"<------->")
-           navigate("/dashboard")
-        }      
+        dispatch(postTask(formData))
+        navigate("/dashboard")
+        //-----replaced----------
+        // const response = await PostResponse('tasks/create',formData)
+        // if(response){
+        //   console.log(response,"<------->")
+        //    navigate("/dashboard")
+        // }      
       }
       // navigate("/dashboard")
   }
