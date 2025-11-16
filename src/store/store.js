@@ -1,4 +1,5 @@
 import { configureStore, isAction } from "@reduxjs/toolkit";
+import TaskReducer from '../features/task/taskSlice.js'
 
 // main components 
 // Action
@@ -14,4 +15,8 @@ import { configureStore, isAction } from "@reduxjs/toolkit";
 //4> create a slice -- define property , -- name , initialState, reducers -- contains properties and functions
 
 
-export const store = configureStore({})
+export const store = configureStore({
+    reducer:{
+        tasks : TaskReducer
+    }
+})

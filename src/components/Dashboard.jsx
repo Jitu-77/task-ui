@@ -7,36 +7,51 @@ import {UpdateByIdResponse} from '../utilities/api.js'
 import {DeleteByIdResponse} from '../utilities/api.js'
 import {userDetails} from '../utilities/userContext.jsx'
 import Delete from '../assets/delete.png';
+import { useSelector,useDispatch } from 'react-redux';
+import {getAllTasks,updateTaskById} from '../features/task/taskSlice.js'
 function Dashboard() {
     const navigate = useNavigate();
-     const {user,setUser} = userDetails();
-     console.log(user,"USER DET")
+    const {user,setUser} = userDetails();
+    // console.log(user,"USER DET")
+    const dispatch = useDispatch()
     const handleLogout=async ()=>{
       const response = await PostResponse('logout',{})
       navigate("/")
-  }
-  const [listData,setListData] = useState([])
-  const fetchData = async ()=>{
-      const dataResponse = await GetResponse('tasks/getAll')
-      if(dataResponse){
-        console.log(dataResponse,"Data Response")
-        setListData(dataResponse?.data)
-      }
-  }
+    }
+    const [listData,setListData] = useState([])
+    // const fetchData = async ()=>{
+    //   const dataResponse = await GetResponse('tasks/getAll')
+    //   if(dataResponse){
+    //     console.log(dataResponse,"Data Response")
+    //     setListData(dataResponse?.data)
+    //   }
+    // }
+    const taskData = useSelector((state)=>state.tasks)
+    console.log("TASK DATA",taskData)
   useEffect( ()=>{
     console.log("In use Effect")
-    fetchData()
+    // fetchData()
+    dispatch(getAllTasks())
   },[])
+  useEffect( ()=>{
+        if(taskData && taskData?.tasks){
+      setListData(taskData?.tasks)
+    }
+  },[taskData])
   const handleToggleCompleted = async (id)=>{
     const data = listData.find((el)=>el._id == id)
     const {completed,...rest} = data
     console.log(completed)
     const payload = {completed:!completed}
-    const patchResponse = await UpdateByIdResponse('tasks/updateById/'+id,payload)
-    if(patchResponse){
-      fetchData();
-      console.log(patchResponse,"PATCH RESPONSE")
-    }
+    console.log({id,payload},"MAIN DATA")
+    dispatch(updateTaskById({id,payload}))
+    // const patchResponse = await UpdateByIdResponse('tasks/updateById/'+id,payload)
+    // if(patchResponse){
+    //   fetchData();
+    //   console.log(patchResponse,"PATCH RESPONSE")
+    // }
+
+
   }
   const handleTasks = (item)=>{
     console.log(item,"ITEM")
@@ -50,7 +65,7 @@ function Dashboard() {
     if(item?._id){
      const deleteResponse = await DeleteByIdResponse('tasks/deleteById/'+item?._id)
      if(deleteResponse){
-      fetchData();
+      // fetchData();
      }
     }
   }

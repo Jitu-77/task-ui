@@ -11,8 +11,7 @@ export const PostResponse = async(url,payload) =>{
         const postResponse = await api.post(url,payload,config)
         return postResponse?.data
     } catch (error) {
-        console.log(error)
-         return null;
+         return error.message;
     }
 }
 
@@ -22,7 +21,7 @@ export const GetResponse = async(url)=>{
         const getResponse = await api.get(url)
         return getResponse?.data
     } catch (error) {
-        
+        return error.message
     }
 }
 
@@ -32,7 +31,7 @@ export const GetByIdResponse = async(url)=>{
         const getResponse = await api.get(url)
         return getResponse?.data
     } catch (error) {
-        
+        return error.message
     }
 }
 
@@ -42,16 +41,17 @@ export const UpdateByIdResponse = async(url,payload) =>{
         const patchResponse = await api.patch(url,payload)
         return patchResponse?.data
     } catch (error) {
-        
+        return error.message
     }
 }
+
 export const DeleteByIdResponse = async(url) =>{
     try {
         const config = {'Content-Type': 'application/json'}
         const deleteResponse = await api.delete(url)
         return deleteResponse?.data
     } catch (error) {
-        
+        return error.message
     }
 }
 

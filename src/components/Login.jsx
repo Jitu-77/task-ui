@@ -9,14 +9,14 @@ import {userDetails} from '../utilities/userContext.jsx'
 function Login() {
   const navigate = useNavigate();
   const {user,setUser} = userDetails()
-  console.log("user Details",user)
+  // console.log("user Details",user)
   const handleSubmit=async (values)=>{
-    console.log("Pressed Continue button", values);
+    // console.log("Pressed Continue button", values);
     if(values){
       const response = await PostResponse('login',values)
       if(response?.status){
-        console.log(response)
-        console.log(user)
+        // console.log(response)
+        // console.log(user)
         setUser(response?.data)
         navigate("/dashboard")
       }
